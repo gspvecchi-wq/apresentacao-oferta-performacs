@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerformanCS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#030A07;
+  --s1:#071410;
+  --s2:#0C1F18;
+  --s3:#112A20;
+  --acc:#00E87A;
+  --acc2:#00C463;
+  --acc-dim:rgba(0,232,122,.12);
+  --acc-border:rgba(0,232,122,.2);
+  --text:#E8F5EF;
+  --sub:#6B9E88;
+  --danger:#FF4466;
+  --warn:#FFB800;
+  --border:rgba(0,232,122,.08);
+}
+
+html,body{width:100%;height:100%;overflow:hidden;}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* GRAIN */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* GLOW */
+.glow{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0;}
+.g1{width:700px;height:700px;top:-200px;left:-150px;background:rgba(0,232,122,.05);}
+.g2{width:500px;height:500px;bottom:-100px;right:-100px;background:rgba(0,196,99,.04);}
+
+/* CAROUSEL */
+.carousel{
+  position:relative;z-index:1;
+  width:100%;height:100vh;
+  overflow:hidden;
+}
+.slides{
+  display:flex;
+  width:100%;height:100%;
+  transition:transform .7s cubic-bezier(.77,0,.175,1);
+}
+.slide{
+  min-width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  padding:60px 100px;
+  position:relative;
+}
+
+/* NAV DOTS */
+.dots{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;gap:8px;z-index:50;
+}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(0,232,122,.25);
+  cursor:pointer;transition:all .3s;
+}
+.dot.active{width:24px;border-radius:3px;background:var(--acc);}
+
+/* ARROWS */
+.arrow{
+  position:fixed;top:50%;transform:translateY(-50%);
+  z-index:50;background:rgba(0,232,122,.08);
+  border:1px solid var(--acc-border);color:var(--acc);
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;
+  transition:all .2s;backdrop-filter:blur(8px);
+}
+.arrow:hover{background:var(--acc-dim);transform:translateY(-50%) scale(1.1);}
+.arrow-left{left:24px;}
+.arrow-right{right:24px;}
+
+/* SLIDE COUNTER */
+.counter{
+  position:fixed;top:28px;right:36px;z-index:50;
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.15em;color:var(--sub);
+}
+.counter span{color:var(--acc);}
+
+/* KEYBOARD HINT */
+.hint{
+  position:fixed;bottom:32px;right:36px;z-index:50;
+  font-size:10px;color:var(--sub);letter-spacing:.08em;
+  opacity:.5;
+}
+
+/* ─────────────────────────────── */
+/* SLIDE STYLES */
+/* ─────────────────────────────── */
+
+/* SLIDE 1 — HERO */
+.s-hero{flex-direction:column;text-align:center;}
+.s-hero .eyebrow{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--acc);
+  margin-bottom:32px;opacity:.8;
+}
+.s-hero .logo-mark{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px,14vw,180px);
+  line-height:.85;
+  background:linear-gradient(135deg,#00E87A 0%,#00C463 40%,#007A42 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:.04em;
+  margin-bottom:16px;
+}
+.s-hero .tagline{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(18px,2.5vw,28px);
+  letter-spacing:.25em;color:rgba(232,245,239,.3);
+  text-transform:uppercase;margin-bottom:40px;
+}
+.s-hero .desc{
+  max-width:560px;font-size:17px;font-weight:300;
+  color:rgba(232,245,239,.6);line-height:1.8;
+  margin:0 auto;
+}
+.s-hero .desc strong{color:var(--text);font-weight:500;}
+
+/* SLIDE 2 — PROBLEMA */
+.s-problem{flex-direction:column;max-width:1000px;width:100%;}
+.slide-label{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:10px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--acc);
+  margin-bottom:20px;opacity:.7;
+}
+.slide-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,5vw,72px);
+  line-height:.95;letter-spacing:.03em;
+  margin-bottom:48px;
+}
+.slide-title em{color:var(--acc);font-style:normal;}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.prob-card{
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:28px;
+  position:relative;overflow:hidden;
+}
+.prob-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--acc),transparent);
+  opacity:.4;
+}
+.prob-n{
+  font-family:'Bebas Neue',sans-serif;font-size:56px;
+  color:rgba(0,232,122,.08);line-height:1;margin-bottom:12px;
+}
+.prob-h{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:8px;}
+.prob-b{font-size:13px;color:var(--sub);line-height:1.65;}
+
+/* SLIDE 3 — COMO FUNCIONA */
+.s-how{flex-direction:column;max-width:1000px;width:100%;}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px;}
+.how-card{
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:28px 32px;
+  display:flex;gap:18px;align-items:flex-start;
+}
+.how-icon{
+  width:48px;height:48px;border-radius:10px;
+  background:var(--acc-dim);border:1px solid var(--acc-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.how-h{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:5px;}
+.how-b{font-size:13px;color:var(--sub);line-height:1.6;}
+
+/* SLIDE 4 — PAINEL AO VIVO */
+.s-panel{gap:60px;max-width:1100px;width:100%;align-items:center;}
+.panel-left{flex:1;}
+.panel-right{
+  flex:1;background:var(--s1);border:1px solid var(--acc-border);
+  border-radius:20px;padding:28px;
+  position:relative;overflow:hidden;
+}
+.panel-right::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top left,rgba(0,232,122,.06) 0%,transparent 60%);
+}
+.panel-header{
+  font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sub);margin-bottom:20px;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+}
+.panel-header::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--acc);box-shadow:0 0 8px var(--acc);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.metric{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.metric:last-of-type{border-bottom:none;}
+.m-label{font-size:12px;color:var(--sub);}
+.m-val{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.04em;}
+.m-green{color:var(--acc);}
+.m-red{color:var(--danger);}
+.m-yellow{color:var(--warn);}
+.panel-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px;}
+.ptag{
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 10px;border-radius:20px;
+}
+.ptag-g{background:rgba(0,232,122,.1);color:var(--acc);border:1px solid rgba(0,232,122,.2);}
+.ptag-r{background:rgba(255,68,102,.1);color:var(--danger);border:1px solid rgba(255,68,102,.2);}
+.ptag-y{background:rgba(255,184,0,.1);color:var(--warn);border:1px solid rgba(255,184,0,.2);}
+
+/* SLIDE 5 — ENTREGÁVEIS */
+.s-del{flex-direction:column;max-width:1000px;width:100%;}
+.del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px;}
+.del-card{
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:24px;
+  transition:border-color .2s;
+}
+.del-card:hover{border-color:var(--acc-border);}
+.del-e{font-size:24px;margin-bottom:12px;}
+.del-h{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:6px;}
+.del-b{font-size:12px;color:var(--sub);line-height:1.6;}
+
+/* SLIDE 6 — BONUS */
+.s-bonus{flex-direction:column;max-width:900px;width:100%;}
+.bonus-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,232,122,.08);border:1px solid var(--acc-border);
+  color:var(--acc);font-family:'Syne',sans-serif;font-weight:800;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:7px 18px;border-radius:30px;margin-bottom:28px;
+  width:fit-content;
+}
+.bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px;}
+.bonus-item{
+  display:flex;gap:14px;
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:12px;padding:18px 20px;
+}
+.bonus-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--acc);color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.bonus-txt{font-size:13px;color:var(--sub);line-height:1.6;}
+.bonus-txt strong{color:var(--text);display:block;margin-bottom:3px;}
+
+/* SLIDE 7 — PREÇO */
+.s-price{flex-direction:column;text-align:center;max-width:700px;width:100%;}
+.price-anchor{font-size:13px;color:var(--sub);text-decoration:line-through;margin-bottom:6px;}
+.price-big{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(80px,14vw,140px);
+  line-height:.9;
+  background:linear-gradient(135deg,#00E87A,#00C463);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:6px;
+}
+.price-parcel{font-size:15px;color:var(--sub);margin-bottom:36px;}
+.price-parcel strong{color:var(--text);}
+.price-includes{
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:24px 28px;
+  text-align:left;margin-bottom:36px;
+  display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;
+}
+.pi{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--sub);}
+.pi::before{content:'✓';color:var(--acc);font-weight:700;}
+.pi strong{color:var(--text);}
+.price-btn{
+  background:var(--acc);color:#000;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:15px;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:20px 52px;border-radius:60px;border:none;cursor:pointer;
+  box-shadow:0 0 50px rgba(0,232,122,.3);
+  transition:transform .2s,box-shadow .2s;
+  display:inline-block;
+}
+.price-btn:hover{transform:translateY(-3px);box-shadow:0 10px 60px rgba(0,232,122,.5);}
+.urgency{margin-top:16px;font-size:12px;color:var(--sub);}
+.urgency strong{color:var(--danger);}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.slide.active .anim{animation:fadeIn .6s ease forwards;}
+.slide.active .anim-1{animation-delay:.05s;opacity:0;}
+.slide.active .anim-2{animation-delay:.15s;opacity:0;}
+.slide.active .anim-3{animation-delay:.25s;opacity:0;}
+.slide.active .anim-4{animation-delay:.35s;opacity:0;}
+.slide.active .anim-5{animation-delay:.45s;opacity:0;}
+.slide.active .anim-6{animation-delay:.55s;opacity:0;}
+</style>
+</head>
+<body>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+
+<!-- COUNTER -->
+<div class="counter"><span id="cur">1</span> / 7</div>
+
+<!-- HINT -->
+<div class="hint">← → ou clique nas setas</div>
+
+<!-- ARROWS -->
+<div class="arrow arrow-left" onclick="prev()">‹</div>
+<div class="arrow arrow-right" onclick="next()">›</div>
+
+<!-- DOTS -->
+<div class="dots" id="dots"></div>
+
+<!-- CAROUSEL -->
+<div class="carousel">
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1 — HERO -->
+  <div class="slide s-hero active">
+    <div class="eyebrow anim anim-1">Apresentando</div>
+    <div class="logo-mark anim anim-2">PerformanCS</div>
+    <div class="tagline anim anim-3">Painel de Performance de Mentoria</div>
+    <p class="desc anim anim-4">
+      A ferramenta que transforma a gestão da sua mentoria em <strong>dados acionáveis</strong> — para que seu time de CS saiba exatamente quem acionar, quando renovar e quem está pronto para subir de nível.
+    </p>
+  </div>
+
+  <!-- SLIDE 2 — PROBLEMA -->
+  <div class="slide s-problem">
+    <div class="slide-label anim anim-1">O problema que resolve</div>
+    <h2 class="slide-title anim anim-2">Você não vê o que está<br><em>acontecendo</em> com seus alunos</h2>
+    <div class="prob-grid anim anim-3">
+      <div class="prob-card">
+        <div class="prob-n">01</div>
+        <div class="prob-h">Acompanhamento às cegas</div>
+        <div class="prob-b">Sem dados de engajamento em tempo real, seu CS age no escuro — só descobre que o aluno sumiu quando já é tarde demais.</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-n">02</div>
+        <div class="prob-h">Renovações perdidas</div>
+        <div class="prob-b">Você não sabe quem está prestes a renovar nem qual é o melhor momento para abordar. A janela fecha e a oportunidade vai embora.</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-n">03</div>
+        <div class="prob-h">Ascensão invisível</div>
+        <div class="prob-b">Os alunos prontos para subir de nível ficam parados porque ninguém identificou o sinal certo na hora certa.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — COMO FUNCIONA -->
+  <div class="slide s-how">
+    <div class="slide-label anim anim-1">Como funciona</div>
+    <h2 class="slide-title anim anim-2">Um painel que <em>pensa</em><br>junto com seu CS</h2>
+    <div class="how-grid anim anim-3">
+      <div class="how-card">
+        <div class="how-icon">📊</div>
+        <div>
+          <div class="how-h">Engajamento em tempo real</div>
+          <div class="how-b">Presença, câmera, vitórias e feedbacks de cada aluno consolidados em um score semanal.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-icon">🔥</div>
+        <div>
+          <div class="how-h">Alertas automáticos</div>
+          <div class="how-b">Urgentes, quedas aceleradas, renovações e candidatos ao próximo nível — identificados automaticamente.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-icon">🤖</div>
+        <div>
+          <div class="how-h">IA integrada</div>
+          <div class="how-b">Diagnóstico individual por aluno e sugestão de mensagem personalizada gerada por inteligência artificial.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-icon">📲</div>
+        <div>
+          <div class="how-h">WhatsApp automático</div>
+          <div class="how-b">Resumo diário enviado para o grupo do CS — urgentes, renovações e aniversariantes, sem abrir o painel.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 — PAINEL -->
+  <div class="slide s-panel">
+    <div class="panel-left">
+      <div class="slide-label anim anim-1">O painel ao vivo</div>
+      <h2 class="slide-title anim anim-2" style="font-size:clamp(32px,4vw,60px);">Tudo que seu<br>CS precisa ver,<br><em>em um lugar só</em></h2>
+      <p class="anim anim-3" style="font-size:15px;color:var(--sub);line-height:1.8;max-width:380px;">
+        Score por aluno, histórico de semanas, faturamento antes e depois, tempo de ciclo, e acionamento direto pelo WhatsApp.
+      </p>
+    </div>
+    <div class="panel-right anim anim-4">
+      <div class="panel-header">Painel ao vivo</div>
+      <div class="metric"><span class="m-label">Score médio de engajamento</span><span class="m-val m-green">78%</span></div>
+      <div class="metric"><span class="m-label">Alunos em zona de risco</span><span class="m-val m-red">12</span></div>
+      <div class="metric"><span class="m-label">Oportunidades de renovação</span><span class="m-val m-yellow">23</span></div>
+      <div class="metric"><span class="m-label">Candidatos ao próximo nível</span><span class="m-val m-green">8</span></div>
+      <div class="metric"><span class="m-label">Acionamentos esta semana</span><span class="m-val m-green">34</span></div>
+      <div class="panel-tags">
+        <span class="ptag ptag-r">🔴 3 urgentes</span>
+        <span class="ptag ptag-y">🔥 5 renovações</span>
+        <span class="ptag ptag-g">⭐ 2 ascensões</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 — ENTREGÁVEIS -->
+  <div class="slide s-del">
+    <div class="slide-label anim anim-1">O que está incluso</div>
+    <h2 class="slide-title anim anim-2">Tudo para <em>implementar</em><br>e operar do dia 1</h2>
+    <div class="del-grid anim anim-3">
+      <div class="del-card">
+        <div class="del-e">🖥️</div>
+        <div class="del-h">Licença vitalícia</div>
+        <div class="del-b">Acesso permanente. Sem mensalidade ou renovação anual.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-e">⚙️</div>
+        <div class="del-h">Implementação personalizada</div>
+        <div class="del-b">Configurado do zero para o seu negócio — suas turmas, integrações e identidade.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-e">🎓</div>
+        <div class="del-h">Treinamento do time</div>
+        <div class="del-b">Sessão ao vivo com até 3 pessoas do seu CS para usar e interpretar os dados.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-e">🤝</div>
+        <div class="del-h">3 meses de acompanhamento</div>
+        <div class="del-b">Suporte direto para ajustes e otimizações. Você não fica sozinho.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-e">🤖</div>
+        <div class="del-h">IA integrada</div>
+        <div class="del-b">Diagnósticos e acionamentos gerados por inteligência artificial para cada aluno.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-e">📲</div>
+        <div class="del-h">Alertas via WhatsApp</div>
+        <div class="del-b">Resumo diário automático para o grupo de CS, sem precisar abrir o painel.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 — BONUS -->
+  <div class="slide s-bonus">
+    <div class="bonus-badge anim anim-1">⚡ Bônus exclusivos</div>
+    <h2 class="slide-title anim anim-2" style="font-size:clamp(32px,4.5vw,60px);">Feche agora e leve<br><em>mais do que o produto</em></h2>
+    <div class="bonus-grid anim anim-3">
+      <div class="bonus-item">
+        <div class="bonus-num">1</div>
+        <div class="bonus-txt"><strong>Implementação expressa em 7 dias úteis</strong>Prazo garantido de entrega rodando — em vez dos 30 dias padrão.</div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">2</div>
+        <div class="bonus-txt"><strong>Sessão estratégica de CS</strong>1h ao vivo para mapear seus processos e adaptar o painel à sua realidade.</div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">3</div>
+        <div class="bonus-txt"><strong>Acesso antecipado a novos módulos</strong>Early adopter: painel do mentorado, gamificação e relatórios executivos sem custo adicional.</div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-num">4</div>
+        <div class="bonus-txt"><strong>Case de sucesso documentado</strong>Sua implementação vira case oficial do PerformanCS — visibilidade para você e seu programa.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 — PREÇO -->
+  <div class="slide s-price">
+    <div class="price-anchor anim anim-1">Valor de referência: R$ 45.000</div>
+    <div class="price-big anim anim-2">R$ 30K</div>
+    <div class="price-parcel anim anim-3">ou <strong>3x R$ 11.000</strong> no cartão</div>
+    <div class="price-includes anim anim-4">
+      <div class="pi"><strong>Licença vitalícia</strong></div>
+      <div class="pi"><strong>Implementação personalizada</strong></div>
+      <div class="pi"><strong>Treinamento do time (3 pessoas)</strong></div>
+      <div class="pi"><strong>3 meses de acompanhamento</strong></div>
+      <div class="pi"><strong>IA integrada</strong></div>
+      <div class="pi"><strong>Alertas via WhatsApp</strong></div>
+      <div class="pi" style="color:var(--acc)"><strong style="color:var(--acc)">+ 4 bônus exclusivos</strong></div>
+    </div>
+    <button class="price-btn anim anim-5">Quero o PerformanCS · R$ 30.000</button>
+    <div class="urgency anim anim-6"><strong>Oferta por tempo limitado.</strong> Após o prazo, o preço volta para R$ 45.000.</div>
+  </div>
+
+</div><!-- /slides -->
+</div><!-- /carousel -->
+
+<script>
+let cur = 0;
+const total = 7;
+const slidesEl = document.getElementById('slides');
+const dotsEl   = document.getElementById('dots');
+const curEl    = document.getElementById('cur');
+
+// Build dots
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n) {
+  const slides = document.querySelectorAll('.slide');
+  slides[cur].classList.remove('active');
+  cur = (n + total) % total;
+  slides[cur].classList.add('active');
+  slidesEl.style.transform = `translateX(-${cur * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  curEl.textContent = cur + 1;
+}
+
+function next() { goTo(cur + 1); }
+function prev() { goTo(cur - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); }
+});
+
+// Touch/swipe
+let startX = 0;
+document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  if (dx < -50) next();
+  if (dx >  50) prev();
+});
+</script>
+</body>
+</html>
