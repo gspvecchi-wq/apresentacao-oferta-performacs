@@ -268,7 +268,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </head>
 <body>
 <div class="glow g1"></div><div class="glow g2"></div>
-<div class="counter"><span id="cur">1</span> / 14</div>
+<div class="counter"><span id="cur">1</span> / 15</div>
 <div class="hint">← → NAVEGAR</div>
 <div class="arrow arrow-left" onclick="prev()">‹</div>
 <div class="arrow arrow-right" onclick="next()">›</div>
@@ -284,7 +284,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   <div class="hero-sub a a3">Retenção · LTV · Performance</div>
 </div>
 
-<!-- ═══ S2 PLANILHA ═══ -->
+<!-- ═══ S2 POSICIONAMENTO ═══ -->
+<div class="slide s-hero">
+  <div class="hero-pos a a1">Pare de perder alunos por falta de visibilidade.<br>Comece a crescer com dados.</div>
+  <p class="hero-desc a a2">
+    O único sistema pensado para <strong>aumentar o LTV e a retenção</strong> de mentorias high ticket — integrando engajamento, inteligência artificial e acionamento direto pelo WhatsApp.
+  </p>
+</div>
+
+<!-- ═══ S3 PLANILHA ═══ -->
 <div class="slide s-sheet">
   <div class="slide-label a a1">O problema que ninguém fala</div>
   <h2 class="slide-title a a2">A planilha não é<br><em>gestão</em> — é ilusão</h2>
@@ -301,12 +309,22 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- ═══ S2B PERFORMANCS ═══ -->
+<!-- ═══ S4 PLANILHA VS PERFORMANCS ═══ -->
 <div class="slide s-sheet">
-  <div class="slide-label a a1">A solução</div>
-  <h2 class="slide-title a a2">Pare de perder alunos<br>por falta de <em>visibilidade</em></h2>
-  <div class="sheet-vs a a3" style="grid-template-columns:1fr;">
-    <div class="sheet-col good hov-card" style="max-width:520px;margin:0 auto;width:100%;">
+  <div class="slide-label a a1">A virada</div>
+  <h2 class="slide-title a a2">Planilha não é<br><em>gestão</em> — é ilusão</h2>
+  <div class="sheet-vs a a3">
+    <div class="sheet-col bad hov-card">
+      <div class="sheet-col-head">❌ Planilha</div>
+      <div class="sheet-row"><span class="dot2 bad-dot"></span>Atualização manual e sujeita a erro</div>
+      <div class="sheet-row"><span class="dot2 bad-dot"></span>Sem alertas automáticos</div>
+      <div class="sheet-row"><span class="dot2 bad-dot"></span>Você não sabe quem sumiu</div>
+      <div class="sheet-row"><span class="dot2 bad-dot"></span>Renovação na intuição</div>
+      <div class="sheet-row"><span class="dot2 bad-dot"></span>CS reativo, nunca proativo</div>
+      <div class="sheet-row"><span class="dot2 bad-dot"></span>Infinitas abas, zero performance</div>
+    </div>
+    <div class="vs-divider">VS</div>
+    <div class="sheet-col good hov-card">
       <div class="sheet-col-head">✅ PerformanCS</div>
       <div class="sheet-row"><span class="dot2 good-dot"></span>Dados em tempo real, zero digitação</div>
       <div class="sheet-row"><span class="dot2 good-dot"></span>Alertas diários via WhatsApp</div>
@@ -316,9 +334,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="sheet-row"><span class="dot2 good-dot"></span>Um painel. Todos os dados.</div>
     </div>
   </div>
-  <p class="a a4" style="font-size:16px;color:rgba(232,245,239,.6);max-width:520px;margin:20px auto 0;line-height:1.8;text-align:center;">
-    O único sistema pensado para <strong style="color:var(--text);">aumentar o LTV e a retenção</strong> de mentorias high ticket — integrando engajamento, inteligência artificial e acionamento direto pelo WhatsApp.
-  </p>
 </div>
 
 <!-- ═══ S3 PROBLEMAS ═══ -->
@@ -629,7 +644,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <script>
 // ── CAROUSEL ──
 let cur = 0;
-const total = 14;
+const total = 15;
 const slidesEl = document.getElementById('slides');
 const dotsEl   = document.getElementById('dots');
 const curEl    = document.getElementById('cur');
