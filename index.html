@@ -268,7 +268,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </head>
 <body>
 <div class="glow g1"></div><div class="glow g2"></div>
-<div class="counter"><span id="cur">1</span> / 13</div>
+<div class="counter"><span id="cur">1</span> / 14</div>
 <div class="hint">← → NAVEGAR</div>
 <div class="arrow arrow-left" onclick="prev()">‹</div>
 <div class="arrow arrow-right" onclick="next()">›</div>
@@ -282,19 +282,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   <div class="hero-eyebrow a a1">Sistema de Gestão para Mentorias High Ticket</div>
   <div class="hero-name a a2">PerformanCS</div>
   <div class="hero-sub a a3">Retenção · LTV · Performance</div>
-  <div class="hero-pos a a4">Pare de perder alunos por falta de visibilidade.<br>Comece a crescer com dados.</div>
-  <p class="hero-desc a a5">
-    O único sistema pensado para <strong>aumentar o LTV e a retenção</strong> de mentorias high ticket — integrando engajamento, inteligência artificial e acionamento direto pelo WhatsApp.
-  </p>
 </div>
 
 <!-- ═══ S2 PLANILHA ═══ -->
 <div class="slide s-sheet">
   <div class="slide-label a a1">O problema que ninguém fala</div>
-  <h2 class="slide-title a a2">Planilhas não são<br><em>gestão</em> — são ilusão</h2>
-  <div class="sheet-vs a a3">
-    <div class="sheet-col bad hov-card">
-      <div class="sheet-col-head">❌ Planilha</div>
+  <h2 class="slide-title a a2">A planilha não é<br><em>gestão</em> — é ilusão</h2>
+  <div class="sheet-vs a a3" style="grid-template-columns:1fr;">
+    <div class="sheet-col bad hov-card" style="max-width:520px;margin:0 auto;width:100%;">
+      <div class="sheet-col-head">❌ Sua planilha hoje</div>
       <div class="sheet-row"><span class="dot2 bad-dot"></span>Atualização manual e sujeita a erro</div>
       <div class="sheet-row"><span class="dot2 bad-dot"></span>Sem alertas automáticos</div>
       <div class="sheet-row"><span class="dot2 bad-dot"></span>Você não sabe quem sumiu</div>
@@ -302,8 +298,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="sheet-row"><span class="dot2 bad-dot"></span>CS reativo, nunca proativo</div>
       <div class="sheet-row"><span class="dot2 bad-dot"></span>Infinitas abas, zero performance</div>
     </div>
-    <div class="vs-divider">VS</div>
-    <div class="sheet-col good hov-card">
+  </div>
+</div>
+
+<!-- ═══ S2B PERFORMANCS ═══ -->
+<div class="slide s-sheet">
+  <div class="slide-label a a1">A solução</div>
+  <h2 class="slide-title a a2">Pare de perder alunos<br>por falta de <em>visibilidade</em></h2>
+  <div class="sheet-vs a a3" style="grid-template-columns:1fr;">
+    <div class="sheet-col good hov-card" style="max-width:520px;margin:0 auto;width:100%;">
       <div class="sheet-col-head">✅ PerformanCS</div>
       <div class="sheet-row"><span class="dot2 good-dot"></span>Dados em tempo real, zero digitação</div>
       <div class="sheet-row"><span class="dot2 good-dot"></span>Alertas diários via WhatsApp</div>
@@ -313,27 +316,30 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       <div class="sheet-row"><span class="dot2 good-dot"></span>Um painel. Todos os dados.</div>
     </div>
   </div>
+  <p class="a a4" style="font-size:16px;color:rgba(232,245,239,.6);max-width:520px;margin:20px auto 0;line-height:1.8;text-align:center;">
+    O único sistema pensado para <strong style="color:var(--text);">aumentar o LTV e a retenção</strong> de mentorias high ticket — integrando engajamento, inteligência artificial e acionamento direto pelo WhatsApp.
+  </p>
 </div>
 
 <!-- ═══ S3 PROBLEMAS ═══ -->
 <div class="slide s-prob">
   <div class="slide-label a a1">Três gaps que custam caro</div>
-  <h2 class="slide-title a a2">Você está perdendo LTV<br><em>todos os dias</em> sem saber</h2>
+  <h2 class="slide-title a a2">Você está perdendo <em>dinheiro</em><br>todos os dias sem saber</h2>
   <div class="prob-grid a a3">
     <div class="prob-card hov-card">
       <div class="prob-n">01</div>
-      <div class="prob-h">Engajamento invisível</div>
+      <div class="prob-h">Aluno some sem aviso</div>
       <div class="prob-b">Sem dados em tempo real, o CS age no escuro. O aluno desengaja semanas antes de cancelar — e ninguém vê.</div>
     </div>
     <div class="prob-card hov-card">
       <div class="prob-n">02</div>
-      <div class="prob-h">Renovações perdidas</div>
+      <div class="prob-h">Renovação na intuição</div>
       <div class="prob-b">A janela ideal de renovação dura dias. Sem identificar o momento certo, você aborda tarde — ou não aborda.</div>
     </div>
     <div class="prob-card hov-card">
       <div class="prob-n">03</div>
-      <div class="prob-h">Ascensão invisível</div>
-      <div class="prob-b">Alunos prontos para subir de nível ficam parados porque ninguém identificou o sinal. Receita que fica na mesa.</div>
+      <div class="prob-h">Upsell deixado na mesa</div>
+      <div class="prob-b">Alunos prontos para subir de nível ficam parados porque ninguém identificou o sinal certo na hora certa.</div>
     </div>
   </div>
 </div>
@@ -535,7 +541,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
       </div>
       <p class="case-desc">Mentoria high ticket para médicos que querem escalar consultórios e construir negócios sólidos. Centenas de alunos ativos, múltiplas turmas simultâneas.</p>
       <p class="case-desc">O PerformanCS nasceu da necessidade real do time de CS do AM — e foi validado em produção com dados reais antes de ser oferecido para o mercado.</p>
-      <div class="case-quote">"Antes, o CS via o aluno sumir e não sabia o que fazer. Agora a gente age antes do problema acontecer."</div>
     </div>
     <div class="case-metrics">
       <div class="case-metric hov-card"><span class="case-metric-label">Turmas gerenciadas simultaneamente</span><span class="case-metric-val up">8+</span></div>
@@ -624,7 +629,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <script>
 // ── CAROUSEL ──
 let cur = 0;
-const total = 13;
+const total = 14;
 const slidesEl = document.getElementById('slides');
 const dotsEl   = document.getElementById('dots');
 const curEl    = document.getElementById('cur');
