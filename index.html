@@ -257,6 +257,64 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .urgency{margin-top:14px;font-size:11px;color:var(--sub);}
 .urgency strong{color:var(--danger);}
 
+/* ── MOBILE ── */
+@media(max-width:768px){
+  /* Hero */
+  .hero-name{font-size:clamp(52px,18vw,80px);}
+  .hero-eyebrow{font-size:9px;letter-spacing:.2em;margin-bottom:16px;}
+  .hero-sub{font-size:clamp(10px,3.5vw,14px);letter-spacing:.12em;margin-bottom:20px;}
+  .hero-pos{font-size:14px;margin-bottom:12px;}
+  .hero-desc{font-size:13px;line-height:1.7;}
+
+  /* Slide geral */
+  .slide-title{font-size:clamp(26px,8vw,40px) !important;margin-bottom:20px;}
+  .slide-label{margin-bottom:10px;}
+
+  /* Sheet */
+  .sheet-col{padding:16px 18px;}
+  .sheet-row{font-size:12px;}
+
+  /* Prob cards */
+  .prob-grid{gap:8px;}
+  .prob-card{padding:18px;}
+  .prob-n{font-size:36px;}
+  .prob-h{font-size:13px;}
+
+  /* Screen slides — esconde mockup em tela muito pequena, mostra só info */
+  .screen-frame{display:none;}
+  .screen-info{width:100%;text-align:center;}
+  .screen-info p{font-size:12px;}
+  .screen-info .slide-title{text-align:center;}
+
+  /* Entregáveis */
+  .del-grid{grid-template-columns:1fr !important;}
+  .del-card{padding:16px;}
+  .del-h{font-size:12px;}
+  .del-b{font-size:11px;}
+
+  /* Bônus */
+  .bonus-badge{font-size:9px;padding:6px 14px;}
+  .bonus-item{padding:14px;}
+  .bonus-txt{font-size:12px;}
+  .bonus-txt strong{font-size:12px;}
+
+  /* Case */
+  .case-box{padding:20px;}
+  .case-desc{font-size:12px;}
+  .case-quote{font-size:13px;}
+  .case-metric-val{font-size:22px;}
+
+  /* ROI */
+  .roi-field input{font-size:14px;padding:10px;}
+  .roi-total-val{font-size:36px;}
+  .roi-next-btn{font-size:12px;padding:12px;}
+
+  /* Preço */
+  .price-big{font-size:clamp(56px,18vw,90px);}
+  .price-btn{font-size:13px;padding:16px 32px;width:100%;}
+  .price-includes{padding:16px;}
+}
+
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
 .slide.active .a{animation:fadeUp .55s ease forwards;}
